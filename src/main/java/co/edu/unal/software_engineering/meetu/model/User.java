@@ -44,7 +44,7 @@ public class User {
     // bi-directional one-to-one User to Calendar
     @OneToOne
     @JoinColumn(name = "idCalendar")
-    private Calendar calendar;
+    private Calendarios calendarios;
 
     public User() {
 
@@ -118,12 +118,12 @@ public class User {
         this.password = password;
     }
 
-    public Calendar getCalendar() {
-        return calendar;
+    public Calendarios getCalendarios() {
+        return calendarios;
     }
 
-    public void setCalendar(Calendar calendar) {
-        this.calendar = calendar;
+    public void setCalendarios(Calendarios calendarios) {
+        this.calendarios = calendarios;
     }
 
     /**

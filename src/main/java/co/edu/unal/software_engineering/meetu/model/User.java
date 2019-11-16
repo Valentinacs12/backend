@@ -23,8 +23,9 @@ public class User implements Serializable{
     @Id
     @SequenceGenerator( name = "USER_USERID_GENERATOR", sequenceName = "public.user_user_id_seq", allocationSize = 1 )
     @GeneratedValue( generator = "USER_USERID_GENERATOR", strategy = GenerationType.SEQUENCE )
-    @Column( name = "user_id" )
 
+
+    @Column( name = "user_id" )
     private Integer id;
 
     @Column(name = "username")
@@ -36,19 +37,23 @@ public class User implements Serializable{
     @JsonIgnore
     @Column(name = "phone_number")
     private String phone_number;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "city")
     private String city;
+
     @Lob
     @Column(name = "image")
     private Blob image;
+
     @Column(name = "password")
     private String password;
 
     //bi-directional many-to-many association to Role
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)// TODO (fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)    // TODO verificar (fetch = FetchType.EAGER)
     @JoinTable( name = "user_role", joinColumns = { @JoinColumn( name = "user_id" ) },
             inverseJoinColumns = { @JoinColumn( name = "role_id" ) } )
     private List<Role> roles;
@@ -77,14 +82,6 @@ public class User implements Serializable{
 
     public void setUsername( String username ){
         this.username = username;
-    }
-
-    public String getPassword( ){
-        return this.password;
-    }
-
-    public void setPassword( String password ){
-        this.password = password;
     }
 
     public String getLast_name() {
@@ -119,6 +116,13 @@ public class User implements Serializable{
         this.city = city;
     }
 
+    public String getPassword( ){
+        return this.password;
+    }
+
+    public void setPassword( String password ){
+        this.password = password;
+    }
 
     public List<Role> getRoles( ){
         return this.roles;

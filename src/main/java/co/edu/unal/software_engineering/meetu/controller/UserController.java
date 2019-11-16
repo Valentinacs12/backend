@@ -43,13 +43,14 @@ public class UserController{
             return new ResponseEntity( HttpStatus.BAD_REQUEST );
         }
         User newUser = new User( );
-        newUser.setLast_name(userPOJO.getLast_name());
-        newUser.setPhone_number(userPOJO.getPhone_number());
-        newUser.setEmail(userPOJO.getEmail());
-        newUser.setCity(userPOJO.getCity());
-        newUser.setPassword(passwordEncoder().encode(userPOJO.getPassword()));
         newUser.setUsername( userPOJO.getUsername( ).toLowerCase() );
+        newUser.setLast_name(userPOJO.getLast_name().toLowerCase());
+        newUser.setPhone_number(userPOJO.getPhone_number());
+        newUser.setEmail(userPOJO.getEmail().toLowerCase());
+        newUser.setCity(userPOJO.getCity().toLowerCase());
+        newUser.setPassword(passwordEncoder().encode(userPOJO.getPassword()));
         newUser.setRoles( Collections.singletonList( role ) );
+
         userService.save( newUser );
         return new ResponseEntity( HttpStatus.CREATED );
     }

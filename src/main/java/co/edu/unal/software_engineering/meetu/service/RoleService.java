@@ -16,7 +16,6 @@ public class RoleService{
         this.roleRepository = roleRepository;
     }
 
-
     public Role findById( Integer id ){
         return roleRepository.findById( id ).orElse( null );
     }

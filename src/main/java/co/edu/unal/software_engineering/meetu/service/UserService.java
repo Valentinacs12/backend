@@ -15,7 +15,6 @@ public class UserService{
         this.userRepository = userRepository;
     }
 
-
     public User findByUsername( String username ){
         return userRepository.findByUsername( username );
     }
@@ -27,10 +26,13 @@ public class UserService{
     public boolean isRightUser( RegisterUserPOJO user ){
         boolean correctness = user.getPassword( ) != null && user.getUsername( ) != null;
         if( correctness ){
-            correctness = !user.getPassword( ).trim( ).isEmpty( )
-                    && !user.getUsername( ).trim( ).isEmpty( );
+            correctness = !user.getUsername( ).trim( ).isEmpty( )
+                    && !user.getLast_name( ).trim( ).isEmpty( )
+                    && !user.getCity( ).trim( ).isEmpty( )
+                    && !user.getEmail( ).trim( ).isEmpty( )
+                    && !user.getPhone_number( ).trim( ).isEmpty( )
+                    && !user.getPassword( ).trim( ).isEmpty( );
         }
         return correctness;
     }
-
 }

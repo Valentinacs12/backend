@@ -38,7 +38,7 @@ public class UserController{
     @PostMapping( value = { "/registro/{roleId}" } )
     public ResponseEntity register( @PathVariable Integer roleId, @RequestBody RegisterUserPOJO userPOJO ){
         Role role = roleService.findById( roleId );
-        User existingUser = userService.findByUsername( userPOJO.getUsername( ) );
+        User existingUser = userService.findByEmail( userPOJO.getEmail( ) );
         if( role == null || existingUser != null || !userService.isRightUser( userPOJO ) ){
             return new ResponseEntity( HttpStatus.BAD_REQUEST );
         }
@@ -58,7 +58,7 @@ public class UserController{
     @PostMapping( value = { "/registro/nuevo-rol/{roleId}" } )
     public ResponseEntity registerRoleToUser( @PathVariable Integer roleId, @RequestBody LoginUserPOJO userPOJO ){
         Role role = roleService.findById( roleId );
-        User existingUser = userService.findByUsername( userPOJO.getUsername( ) );
+        User existingUser = userService.findByEmail( userPOJO.getUsername( ) );
         if( role == null || existingUser == null || existingUser.getRoles( ).contains( role ) ){
             return new ResponseEntity( HttpStatus.BAD_REQUEST );
         }else if( !passwordEncoder( ).matches( userPOJO.getPassword( ), existingUser.getPassword( ) ) ){

@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PossibleDateRepository extends JpaRepository<PossibleDate, Integer>{
+    PossibleDate findByPlanId( String planId );
 
 }

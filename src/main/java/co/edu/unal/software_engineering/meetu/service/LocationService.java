@@ -13,11 +13,13 @@ public class LocationService {
         this.locationRepository = locationRepository;
     }
 
-    public Location findById(Integer id ){
+    public Location findByIdPlan(Integer id ){
         return locationRepository.findById( id ).orElse( null );
     }
-
+/*
     public Location findByPlanId( Integer planId ){
         return locationRepository.findByPlanId(  planId );
     }
+
+ */
 }

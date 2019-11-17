@@ -20,9 +20,12 @@ public class BudgetService {
         return budgetRepository.findById(id).orElse(null);
     }
 
+    /*
     public Budget findByPlanId(Integer planId) {
         return budgetRepository.findByPlanId(  planId );
     }
+    */
+
 
     public void save( Budget budget ){
         budgetRepository.save( budget );

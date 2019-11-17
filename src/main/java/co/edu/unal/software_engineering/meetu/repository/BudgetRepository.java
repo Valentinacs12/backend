@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BudgetRepository extends JpaRepository<Budget, Integer>{
-    Budget findByPlanId( Integer planId );
+    // Budget findByPlanId( Integer planId );
 }

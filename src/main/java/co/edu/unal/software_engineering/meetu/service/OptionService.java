@@ -20,9 +20,11 @@ public class OptionService {
         return optionRepository.findById( id ).orElse( null );
     }
 
+    /*
     public Option findByPlanId(Integer planId) {
         return optionRepository.findByPlanId(  planId );
     }
+     */
 
     public void save( Option option ){
         optionRepository.save( option );

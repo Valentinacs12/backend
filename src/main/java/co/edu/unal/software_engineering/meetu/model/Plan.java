@@ -60,8 +60,8 @@ public class Plan implements Serializable {
     // bi-directional one-to-many association to Location
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "plan")
-    private List<Location> location;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "plan")
+    private List<Location> locations;
 
     // bi-directional one-to-many association to Date
 
@@ -169,11 +169,11 @@ public class Plan implements Serializable {
     }
 
     public List<Location> getLocation() {
-        return location;
+        return locations;
     }
 
     public void setLocation(List<Location> location) {
-        this.location = location;
+        this.locations = location;
     }
 
     public List<PossibleDate> getDates() {

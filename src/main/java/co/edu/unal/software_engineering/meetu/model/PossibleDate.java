@@ -34,7 +34,7 @@ public class PossibleDate implements Serializable {
     // bi-directional many-to-one association to Plan
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "planId")
+    @JoinColumn(name = "idPlan")
     private Plan plan;
 
     /**

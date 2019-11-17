@@ -38,8 +38,9 @@ public class PlanController {
         List<Budget> listBudgets = planPOJO.getBudgets();
         for (Budget budget: listBudgets) {
             newPlan.addBudget(budget);
+            budget.get
         }
- */
+*/
         return new ResponseEntity( HttpStatus.CREATED );
 
     }

@@ -8,8 +8,8 @@ import javax.persistence.*;
  * The persistent class for the user database table.
  */
 @Entity
-@Table(name = "budget", schema = "public")
-public class Budget implements Serializable {
+@Table(name = "location", schema = "public")
+public class Location implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,14 +18,14 @@ public class Budget implements Serializable {
      */
 
     @Id
-    @SequenceGenerator(name = "BUDGET_BUDGETID_GENERATOR", sequenceName = "public.budget_budget_id_seq", allocationSize = 1)
-    @GeneratedValue(generator = "BUDGET_BUDGETID_GENERATOR", strategy = GenerationType.SEQUENCE)
-    @Column(name = "idBudget")
+    @SequenceGenerator(name = "LOCATION_LOCATIONID_GENERATOR", sequenceName = "public.location_location_id_seq", allocationSize = 1)
+    @GeneratedValue(generator = "LOCATION_LOCATIONID_GENERATOR", strategy = GenerationType.SEQUENCE)
+    @Column(name = "idLocation")
 
-    private Integer idBudget;
+    private Integer idLocation;
 
-    @Column(name = "money")
-    private Integer money;
+    @Column(name = "name")
+    private String name;
 
     // bi-directional many-to-one association to Plan
     @JsonIgnore
@@ -37,19 +37,27 @@ public class Budget implements Serializable {
      * Constructors
      */
 
-    public Budget() {
+    public Location() {
     }
 
     /**
      * Getters and Setters
      */
 
-    public Integer getIdBudget() {
-        return this.idBudget;
+    public Integer getIdLocation() {
+        return idLocation;
     }
 
-    public void setIdBudget(Integer id) {
-        this.idBudget = id;
+    public void setIdLocation(Integer idLocation) {
+        this.idLocation = idLocation;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Plan getPlan() {
@@ -66,21 +74,14 @@ public class Budget implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Budget))
+        if (!(object instanceof Location))
             return false;
-        return idBudget.equals(((Budget) object).getIdBudget());
+        return idLocation.equals(((Location) object).getIdLocation());
     }
 
     @Override
     public int hashCode() {
-        return idBudget;
+        return idLocation;
     }
 
-    public Integer getMoney() {
-        return money;
-    }
-
-    public void setMoney(Integer money) {
-        this.money = money;
-    }
 }

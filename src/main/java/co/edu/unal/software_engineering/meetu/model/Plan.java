@@ -1,5 +1,5 @@
 
-package co.edu.unal.software_engineering.labs.model;
+package co.edu.unal.software_engineering.meetu.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
@@ -143,6 +143,10 @@ public class Plan implements Serializable {
     /**
      * Methods
      */
+
+    public void addBudget( Budget budget ){
+        budgets.add( budget );
+    }
 
     @Override
     public boolean equals(Object object) {

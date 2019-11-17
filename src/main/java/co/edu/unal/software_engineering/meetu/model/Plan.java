@@ -33,14 +33,22 @@ public class Plan implements Serializable {
     private String description;
 
     // bi-directional one-to-many association to Comment
-
     //@JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, mappedBy = "plan")
     private List<Budget> budgets;
 
     // bi-directional one-to-many association to Location
+    //@JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, mappedBy = "plan")
+    private List<Comment> comments;
 
+    // bi-directional one-to-many association to Location
+    //@JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, mappedBy = "plan")
+    private List<Location> locations;
 
     /**
      * Constructors
@@ -85,12 +93,31 @@ public class Plan implements Serializable {
         this.budgets = budgets;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+    }
 
     /**
      * Methods
      */
     public void addBudget( Budget budget ){
         budgets.add( budget );
+    }
+
+    public void addComment( Comment comment ){
+        comments.add( comment );
     }
 
     @Override

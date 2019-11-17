@@ -8,8 +8,8 @@ import javax.persistence.*;
  * The persistent class for the user database table.
  */
 @Entity
-@Table(name = "budget", schema = "public")
-public class Budget implements Serializable {
+@Table(name = "location", schema = "public")
+public class Location implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -17,14 +17,14 @@ public class Budget implements Serializable {
      * Attributes
      */
     @Id
-    @SequenceGenerator(name = "BUDGET_BUDGETID_GENERATOR", sequenceName = "public.budget_budget_id_seq", allocationSize = 1)
-    @GeneratedValue(generator = "BUDGET_BUDGETID_GENERATOR", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "LOCATION_LOCATIONID_GENERATOR", sequenceName = "public.location_location_id_seq", allocationSize = 1)
+    @GeneratedValue(generator = "LOCATION_LOCATIONID_GENERATOR", strategy = GenerationType.SEQUENCE)
 
-    @Column(name = "budget_id")
-    private Integer budget_id;
+    @Column(name = "location_id")
+    private Integer location_id;
 
-    @Column(name = "money")
-    private Integer money;
+    @Column(name = "name")
+    private String name;
 
     // bi-directional many-to-one association to Plan
     @JsonIgnore
@@ -36,27 +36,28 @@ public class Budget implements Serializable {
     /**
      * Constructors
      */
-    public Budget() {
+    public Location() {
     }
 
 
     /**
      * Getters and Setters
      */
-    public Integer getBudget_id() {
-        return budget_id;
+
+    public Integer getLocation_id() {
+        return location_id;
     }
 
-    public void setBudget_id(Integer budget_id) {
-        this.budget_id = budget_id;
+    public void setLocation_id(Integer location_id) {
+        this.location_id = location_id;
     }
 
-    public Integer getMoney() {
-        return money;
+    public String getName() {
+        return name;
     }
 
-    public void setMoney(Integer money) {
-        this.money = money;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Plan getPlan() {
@@ -73,13 +74,13 @@ public class Budget implements Serializable {
      */
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Budget))
+        if (!(object instanceof Location))
             return false;
-        return budget_id.equals(((Budget) object).getBudget_id());
+        return location_id.equals(((Location) object).getLocation_id());
     }
 
     @Override
     public int hashCode() {
-        return budget_id;
+        return location_id;
     }
 }

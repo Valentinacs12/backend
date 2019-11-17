@@ -30,11 +30,13 @@ public class Plan implements Serializable {
     @Id
     @SequenceGenerator(name = "PLAN_PLANID_GENERATOR", sequenceName = "public.plan_plan_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "PLAN_PLANID_GENERATOR", strategy = GenerationType.SEQUENCE)
-    @Column(name = "idPlan")
 
+    @Column(name = "idPlan")
     private Integer idPlan;
+
     @Column(name = "title")
     private String title;
+
     @Column(name = "description")
     private String description;
 
@@ -42,45 +44,17 @@ public class Plan implements Serializable {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "plan")
-    private List<Comment> comments;
-
-    /*
-     * // bi-directional many-to-many association to User ??????
-     * 
-     * @JsonIgnore
-     * 
-     * @ManyToMany(mappedBy = "plans") private List<User> users;
-     */
-
-    // bi-directional One-to-many association to Role
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "plan")
     private List<Budget> budgets;
 
     // bi-directional one-to-many association to Location
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "plan")
-    private List<Location> location;
-
-    // bi-directional one-to-many association to Date
-
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "plan")
-    private List<PossibleDate> dates;
-
-    // bi-directional many-to-many association to Option
-
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "plan")
-    private List<Option> options;
 
     /**
      * Constructors
      */
-
     public Plan() {
     }
+
 
     /**
      * Getters and Setters
@@ -118,6 +92,7 @@ public class Plan implements Serializable {
      * 
      * public void setUsers(List<User> users) { this.users = users; }
      */
+
     public List<Budget> getBudgets() {
         return budgets;
     }
@@ -125,25 +100,11 @@ public class Plan implements Serializable {
     public void setBudgets(List<Budget> budgets) {
         this.budgets = budgets;
     }
-    /*
-     * public List<Location> getLocations() { return locations; }
-     * 
-     * public void setLocations(List<Location> locations) { this.locations =
-     * locations; }
-     * 
-     * public List<Date> getDates() { return dates; }
-     * 
-     * public void setDates(List<Date> dates) { this.dates = dates; }
-     * 
-     * public List<Option> getOptions() { return options; }
-     * 
-     * public void setOptions(List<Option> options) { this.options = options; }
-     */
+
 
     /**
      * Methods
      */
-
     public void addBudget( Budget budget ){
         budgets.add( budget );
     }
@@ -160,36 +121,6 @@ public class Plan implements Serializable {
         return idPlan;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public List<Location> getLocation() {
-        return location;
-    }
-
-    public void setLocation(List<Location> location) {
-        this.location = location;
-    }
-
-    public List<PossibleDate> getDates() {
-        return dates;
-    }
-
-    public void setDates(List<PossibleDate> dates) {
-        this.dates = dates;
-    }
-
-    public List<Option> getOptions() {
-        return options;
-    }
-
-    public void setOptions(List<Option> options) {
-        this.options = options;
-    }
 
 }

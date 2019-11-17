@@ -22,14 +22,15 @@ public class PlanService {
         return planRepository.findById(id).orElse(null);
     }
 
-/*    public Plan findByPlanId(Integer planId) {
-        return planRepository.findByPlanId(planId);
-    }
-
- */
     public void save( Plan plan ){
         planRepository.save( plan );
     }
+
+    /*
+    public Plan findByPlanId(Integer planId) {
+        return planRepository.findByPlanId(planId);
+    }
+     */
 
     public boolean isRightPlan(CreatePlanPOJO plan ){
         boolean correctness = plan.getDescription() != null && plan.getTitle() != null;

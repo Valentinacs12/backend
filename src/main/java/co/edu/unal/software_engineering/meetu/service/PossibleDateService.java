@@ -25,4 +25,8 @@ public class PossibleDateService {
     public PossibleDate findByPlanId( String planId ){
         return possibleDateRepository.findByPlanId(  planId );
     }
+
+    public void save( PossibleDate possibleDate ){
+        possibleDateRepository.save( possibleDate );
+    }
 }

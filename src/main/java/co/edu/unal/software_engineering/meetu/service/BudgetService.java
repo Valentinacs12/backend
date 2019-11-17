@@ -4,6 +4,7 @@ import co.edu.unal.software_engineering.meetu.model.Budget;
 import co.edu.unal.software_engineering.meetu.model.Plan;
 import co.edu.unal.software_engineering.meetu.pojo.CreatePlanPOJO;
 import co.edu.unal.software_engineering.meetu.repository.BudgetRepository;
+import co.edu.unal.software_engineering.meetu.repository.PlanRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,8 +20,8 @@ public class BudgetService {
         return budgetRepository.findById(id).orElse(null);
     }
 
-    public Budget findByPlanId(String planId) {
-        return budgetRepository.findByPlanId(planId);
+    public Budget findByPlanId(Integer planId) {
+        return budgetRepository.findByPlanId(  planId );
     }
 
     public void save( Budget budget ){

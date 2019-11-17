@@ -17,7 +17,7 @@ public class LocationService {
         return locationRepository.findById( id ).orElse( null );
     }
 
-    public Location findByPlanId( String planId ){
+    public Location findByPlanId( Integer planId ){
         return locationRepository.findByPlanId(  planId );
     }
 }

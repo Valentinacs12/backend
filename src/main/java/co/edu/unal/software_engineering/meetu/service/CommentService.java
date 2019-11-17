@@ -18,7 +18,7 @@ public class CommentService {
         return commentRepository.findById( id ).orElse( null );
     }
 
-    public Comment findByPlanId( String planId ){
+    public Comment findByPlanId( Integer planId ){
         return commentRepository.findByPlanId(  planId );
     }
 }

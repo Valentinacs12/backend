@@ -20,7 +20,7 @@ public class OptionService {
         return optionRepository.findById( id ).orElse( null );
     }
 
-    public Option findByPlanId( String planId ){
+    public Option findByPlanId(Integer planId) {
         return optionRepository.findByPlanId(  planId );
     }
 

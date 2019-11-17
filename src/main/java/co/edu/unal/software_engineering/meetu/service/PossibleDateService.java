@@ -1,7 +1,9 @@
 package co.edu.unal.software_engineering.meetu.service;
 
+import co.edu.unal.software_engineering.meetu.model.Plan;
 import co.edu.unal.software_engineering.meetu.model.PossibleDate;
 import co.edu.unal.software_engineering.meetu.model.Role;
+import co.edu.unal.software_engineering.meetu.repository.PlanRepository;
 import co.edu.unal.software_engineering.meetu.repository.PossibleDateRepository;
 import co.edu.unal.software_engineering.meetu.repository.RoleRepository;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,7 @@ public class PossibleDateService {
         return possibleDateRepository.findById( id ).orElse( null );
     }
 
-    public PossibleDate findByPlanId( String planId ){
+    public PossibleDate findByPlanId(Integer planId) {
         return possibleDateRepository.findByPlanId(  planId );
     }
 

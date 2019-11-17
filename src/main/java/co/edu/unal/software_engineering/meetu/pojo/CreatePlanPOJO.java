@@ -1,5 +1,6 @@
 package co.edu.unal.software_engineering.meetu.pojo;
 
+import co.edu.unal.software_engineering.meetu.model.Budget;
 import co.edu.unal.software_engineering.meetu.model.Plan;
 
 import java.util.List;
@@ -8,7 +9,7 @@ public class CreatePlanPOJO {
 
     private String title;
     private String description;
-    private List<Plan> plans;
+    private List<Budget> budgets;
 
 
     public String getTitle() {
@@ -27,11 +28,11 @@ public class CreatePlanPOJO {
         this.description = description;
     }
 
-    public List<Plan> getPlans() {
-        return plans;
+    public List<Budget> getBudgets() {
+        return budgets;
     }
 
-    public void setPlans(List<Plan> plans) {
-        this.plans = plans;
+    public void setBudgets(List<Budget> budgets) {
+        this.budgets = budgets;
     }
 }

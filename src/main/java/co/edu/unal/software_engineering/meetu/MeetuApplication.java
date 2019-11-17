@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MeetuApplication {
 
     public static void main( String[] args ){
-        SpringApplication.run( MeetuApplication.class, args );
+        SpringApplication.run(  MeetuApplication.class, args );
     }
 
 }

@@ -27,8 +27,8 @@ public class Budget implements Serializable {
     private Integer money;
 
     // bi-directional many-to-one association to Plan
-    // @JsonIgnore
-    @ManyToOne()
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plan_id")
     private Plan plan;
 

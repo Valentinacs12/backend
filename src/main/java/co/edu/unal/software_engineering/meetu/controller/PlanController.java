@@ -17,11 +17,11 @@ import java.util.List;
 public class PlanController {
 
     private final PlanService planService;
-    private final BudgetService budgetService;
+    // private final BudgetService budgetService;
 
     public PlanController(PlanService planService, BudgetService budgetService){
         this.planService = planService;
-        this.budgetService = budgetService;
+       // this.budgetService = budgetService;
     }
 
 
@@ -33,24 +33,23 @@ public class PlanController {
 
         newPlan.setDescription(planPOJO.getDescription());
         newPlan.setTitle(planPOJO.getTitle());
-  //      newPlan.setIdPlan(22);
-      //  newPlan.setBudgets(planPOJO.getBudgets());
+        // newPlan.setIdPlan(22);
+        newPlan.setBudgets(planPOJO.getBudgets());
         planService.save(newPlan);
-        Plan temp = planService.findById(2);
-
+        //   Plan temp = planService.findById(2);
+        /*
         List<Budget> listBudgets = planPOJO.getBudgets();
         for (Budget budget: listBudgets) {
             Budget newBudget = new Budget();
             newBudget.setMoney(budget.getMoney());
-            newBudget.setPlan(temp);
+            newBudget.setPlan(newPlan);
             budgetService.save(newBudget);
+           // newPlan.addBudget(newBudget);
         }
 
-
-
+         */
 
         return new ResponseEntity( HttpStatus.CREATED );
-
     }
 
 
@@ -59,6 +58,4 @@ public class PlanController {
         Plan temp = planService.findById(planId);
         return temp;
     }
-
-
 }

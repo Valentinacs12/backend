@@ -1,18 +1,10 @@
-
 package co.edu.unal.software_engineering.meetu.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
-/*
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-*/
 
 /**
  * The persistent class for the plan database table.
@@ -31,8 +23,8 @@ public class Plan implements Serializable {
     @SequenceGenerator(name = "PLAN_PLANID_GENERATOR", sequenceName = "public.plan_plan_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "PLAN_PLANID_GENERATOR", strategy = GenerationType.SEQUENCE)
 
-    @Column(name = "idPlan")
-    private Integer idPlan;
+    @Column(name = "plan_id")
+    private Integer plan_id;
 
     @Column(name = "title")
     private String title;
@@ -42,8 +34,8 @@ public class Plan implements Serializable {
 
     // bi-directional one-to-many association to Comment
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "plan")
+    // @JsonIgnore
+    @OneToMany(mappedBy = "plan")
     private List<Budget> budgets;
 
     // bi-directional one-to-many association to Location
@@ -59,12 +51,13 @@ public class Plan implements Serializable {
     /**
      * Getters and Setters
      */
-    public Integer getIdPlan() {
-        return idPlan;
+
+    public Integer getPlan_id() {
+        return plan_id;
     }
 
-    public void setIdPlan(Integer idPlan) {
-        this.idPlan = idPlan;
+    public void setPlan_id(Integer plan_id) {
+        this.plan_id = plan_id;
     }
 
     public String getTitle() {
@@ -82,16 +75,6 @@ public class Plan implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    /*
-     * public List<Comment> getComments() { return comments; }
-     * 
-     * public void setComments(List<Comment> comments) { this.comments = comments; }
-     * 
-     * public List<User> getUsers() { return users; }
-     * 
-     * public void setUsers(List<User> users) { this.users = users; }
-     */
 
     public List<Budget> getBudgets() {
         return budgets;
@@ -113,14 +96,11 @@ public class Plan implements Serializable {
     public boolean equals(Object object) {
         if (!(object instanceof Plan))
             return false;
-        return idPlan.equals(((Plan) object).getIdPlan());
+        return plan_id.equals(((Plan) object).getPlan_id());
     }
 
     @Override
     public int hashCode() {
-        return idPlan;
+        return plan_id;
     }
-
-
-
 }

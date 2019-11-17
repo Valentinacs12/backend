@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -33,21 +34,20 @@ public class PlanController {
 
         newPlan.setDescription(planPOJO.getDescription());
         newPlan.setTitle(planPOJO.getTitle());
-        // newPlan.setIdPlan(22);
-        newPlan.setBudgets(planPOJO.getBudgets());
+        // newPlan.setBudgets(planPOJO.getBudgets());
         planService.save(newPlan);
-        //   Plan temp = planService.findById(2);
-        /*
+
         List<Budget> listBudgets = planPOJO.getBudgets();
+        List<Budget> ltbg = new ArrayList<Budget>();
         for (Budget budget: listBudgets) {
             Budget newBudget = new Budget();
             newBudget.setMoney(budget.getMoney());
             newBudget.setPlan(newPlan);
-            budgetService.save(newBudget);
-           // newPlan.addBudget(newBudget);
+            ltbg.add(newBudget);
+            // newPlan.addBudget(newBudget);
         }
-
-         */
+        newPlan.setBudgets(ltbg);
+        planService.save(newPlan);
 
         return new ResponseEntity( HttpStatus.CREATED );
     }

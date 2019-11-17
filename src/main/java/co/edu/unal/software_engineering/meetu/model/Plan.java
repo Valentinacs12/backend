@@ -34,8 +34,9 @@ public class Plan implements Serializable {
 
     // bi-directional one-to-many association to Comment
 
-    // @JsonIgnore
-    @OneToMany(mappedBy = "plan")
+    //@JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, mappedBy = "plan")
     private List<Budget> budgets;
 
     // bi-directional one-to-many association to Location

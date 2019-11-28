@@ -1,9 +1,7 @@
 package co.edu.unal.software_engineering.meetu.service;
 
 import co.edu.unal.software_engineering.meetu.model.Budget;
-import co.edu.unal.software_engineering.meetu.model.Role;
 import co.edu.unal.software_engineering.meetu.repository.BudgetRepository;
-import co.edu.unal.software_engineering.meetu.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +16,8 @@ public class BudgetService {
         this.budgetRepository = budgetRepository;
     }
 
-    public void save( Budget buget ){
-        budgetRepository.save( buget );
+    public void save( Budget budget ){
+        budgetRepository.save( budget );
     }
 
 }

@@ -4,6 +4,8 @@ import co.edu.unal.software_engineering.meetu.model.Budget;
 import co.edu.unal.software_engineering.meetu.model.Comment;
 import co.edu.unal.software_engineering.meetu.model.Location;
 import co.edu.unal.software_engineering.meetu.model.Plan;
+import co.edu.unal.software_engineering.meetu.model.Option;
+import co.edu.unal.software_engineering.meetu.model.PossibleDate;
 import co.edu.unal.software_engineering.meetu.pojo.CreatePlanPOJO;
 import co.edu.unal.software_engineering.meetu.service.BudgetService;
 import co.edu.unal.software_engineering.meetu.service.PlanService;
@@ -64,6 +66,7 @@ public class PlanController {
         newPlan.setComments(ltcmm);
         planService.save(newPlan);
 
+
         List<Location> listLocations = planPOJO.getLocations();
         List<Location> ltlc = new ArrayList<Location>();
         for (Location location: listLocations) {
@@ -76,6 +79,32 @@ public class PlanController {
         newPlan.setLocations(ltlc);
         planService.save(newPlan);
 
+
+        List<Option> listOptions = planPOJO.getOptions();
+        List<Option> lto = new ArrayList<Option>();
+        for (Option option: listOptions) {
+            Option newOption = new Option();
+            newOption.setName(option.getName());
+            newOption.setPlan(newPlan);
+            lto.add(newOption);
+            // newPlan.addBudget(newBudget);
+        }
+        newPlan.setOptions(lto);
+        planService.save(newPlan);
+
+
+        List<PossibleDate> listDates = planPOJO.getDates();
+        List<PossibleDate> ltpd = new ArrayList<PossibleDate>();
+        for (PossibleDate date: listDates) {
+            PossibleDate newDate = new PossibleDate();
+            newDate.setStart_date(date.getStart_date());
+            newDate.setEnd_date(date.getEnd_date());
+            newDate.setPlan(newPlan);
+            ltpd.add(newDate);
+            // newPlan.addBudget(newBudget);
+        }
+        newPlan.setDates(ltpd);
+        planService.save(newPlan);
 
 
         return new ResponseEntity( HttpStatus.CREATED );

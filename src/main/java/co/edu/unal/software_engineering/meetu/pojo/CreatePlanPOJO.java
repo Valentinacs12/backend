@@ -1,9 +1,6 @@
 package co.edu.unal.software_engineering.meetu.pojo;
 
-import co.edu.unal.software_engineering.meetu.model.Budget;
-import co.edu.unal.software_engineering.meetu.model.Comment;
-import co.edu.unal.software_engineering.meetu.model.Location;
-import co.edu.unal.software_engineering.meetu.model.Plan;
+import co.edu.unal.software_engineering.meetu.model.*;
 
 import java.util.List;
 
@@ -14,6 +11,8 @@ public class CreatePlanPOJO {
     private List<Budget> budgets;
     private List<Comment> comments;
     private List<Location> locations;
+    private List<Option> options;
+    private List<PossibleDate> dates;
 
     public String getTitle() {
         return title;
@@ -53,5 +52,21 @@ public class CreatePlanPOJO {
 
     public void setLocations(List<Location> locations) {
         this.locations = locations;
+    }
+
+    public List<Option> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<Option> options) {
+        this.options = options;
+    }
+
+    public List<PossibleDate> getDates() {
+        return dates;
+    }
+
+    public void setDates(List<PossibleDate> dates) {
+        this.dates = dates;
     }
 }

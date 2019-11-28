@@ -50,6 +50,18 @@ public class Plan implements Serializable {
             fetch = FetchType.LAZY, mappedBy = "plan")
     private List<Location> locations;
 
+    // bi-directional one-to-many association to Option
+    //@JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, mappedBy = "plan")
+    private List<Option> options;
+
+    // bi-directional one-to-many association to PossibleDate
+    //@JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, mappedBy = "plan")
+    private List<PossibleDate> dates;
+
     /**
      * Constructors
      */
@@ -109,6 +121,22 @@ public class Plan implements Serializable {
         this.locations = locations;
     }
 
+    public List<Option> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<Option> options) {
+        this.options = options;
+    }
+
+    public List<PossibleDate> getDates() {
+        return dates;
+    }
+
+    public void setDates(List<PossibleDate> dates) {
+        this.dates = dates;
+    }
+
     /**
      * Methods
      */
@@ -118,6 +146,14 @@ public class Plan implements Serializable {
 
     public void addComment( Comment comment ){
         comments.add( comment );
+    }
+
+    public void addOption( Option option ){
+        options.add( option );
+    }
+
+    public void addDate( PossibleDate date ){
+        dates.add( date );
     }
 
     @Override

@@ -1,8 +1,9 @@
 package co.edu.unal.software_engineering.meetu.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.io.Serializable;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * The persistent class for the user database table.

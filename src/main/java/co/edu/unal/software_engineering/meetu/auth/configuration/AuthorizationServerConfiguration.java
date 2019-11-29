@@ -15,7 +15,7 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 
 @Configuration
 @EnableAuthorizationServer
-public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter{
+public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
     private final static String TRUSTED_CLIENT = "soft-eng-ii";
     private final static String SECRET = "secret";
@@ -49,7 +49,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     }
 
     @Override
-    public void configure( ClientDetailsServiceConfigurer client ) throws Exception{
+    public void configure( ClientDetailsServiceConfigurer client ) throws Exception {
         client.inMemory( )
                 .withClient( TRUSTED_CLIENT )
                 .authorizedGrantTypes( AUTHORIZED_GRANT_TYPES ).scopes( SCOPES )

@@ -2,8 +2,8 @@ package co.edu.unal.software_engineering.meetu.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table( name = "role", schema = "public" )
-public class Role implements Serializable{
+public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

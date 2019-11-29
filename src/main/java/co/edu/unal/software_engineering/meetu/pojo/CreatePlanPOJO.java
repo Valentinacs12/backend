@@ -1,7 +1,6 @@
 package co.edu.unal.software_engineering.meetu.pojo;
 
 import co.edu.unal.software_engineering.meetu.model.Budget;
-import co.edu.unal.software_engineering.meetu.model.Plan;
 
 import java.util.List;
 

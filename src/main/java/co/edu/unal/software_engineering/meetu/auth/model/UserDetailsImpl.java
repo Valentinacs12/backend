@@ -1,14 +1,10 @@
 package co.edu.unal.software_engineering.meetu.auth.model;
 
-import co.edu.unal.software_engineering.meetu.model.Role;
 import co.edu.unal.software_engineering.meetu.model.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 
 public class UserDetailsImpl implements UserDetails{
@@ -19,9 +15,9 @@ public class UserDetailsImpl implements UserDetails{
 
 
     public UserDetailsImpl( User user ){
-        this.username = user.getEmail( );
+        this.username = user.getUsername( );
         this.password = user.getPassword( );
-        this.authorities = translateRoles( user.getRoles( ) );
+
     }
 
     @Override
@@ -59,12 +55,5 @@ public class UserDetailsImpl implements UserDetails{
         return true;
     }
 
-    private Collection<? extends GrantedAuthority> translateRoles( List<Role> roles ){
-        List<GrantedAuthority> authorities = new ArrayList<>( );
-        for( Role role : roles ){
-            String roleName = "ROLE_" + role.getRoleName( ).toUpperCase( );
-            authorities.add( new SimpleGrantedAuthority( roleName ) );
-        }
-        return authorities;
-    }
+   
 }

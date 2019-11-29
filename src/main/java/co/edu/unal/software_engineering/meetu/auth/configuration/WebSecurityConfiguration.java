@@ -23,7 +23,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
     }
 
     @Override
-    protected void configure( AuthenticationManagerBuilder builder ) throws Exception{
+    protected void configure( AuthenticationManagerBuilder builder ) throws Exception {
         builder.userDetailsService( userDetailsService( ) ).passwordEncoder( passwordEncoder( ) );
     }
 
@@ -34,7 +34,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean( ) throws Exception{
+    public AuthenticationManager authenticationManagerBean( ) throws Exception {
         return super.authenticationManagerBean( );
     }
 

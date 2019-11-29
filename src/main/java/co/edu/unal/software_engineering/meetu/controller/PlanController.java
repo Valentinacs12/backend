@@ -1,18 +1,14 @@
 package co.edu.unal.software_engineering.meetu.controller;
 
-import co.edu.unal.software_engineering.meetu.model.Budget;
 import co.edu.unal.software_engineering.meetu.model.Plan;
-import co.edu.unal.software_engineering.meetu.model.Role;
-import co.edu.unal.software_engineering.meetu.model.User;
 import co.edu.unal.software_engineering.meetu.pojo.CreatePlanPOJO;
-import co.edu.unal.software_engineering.meetu.pojo.RegisterUserPOJO;
 import co.edu.unal.software_engineering.meetu.service.PlanService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Collections;
-import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @CrossOrigin

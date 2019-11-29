@@ -1,9 +1,7 @@
 package co.edu.unal.software_engineering.meetu.service;
 
 import co.edu.unal.software_engineering.meetu.model.Option;
-import co.edu.unal.software_engineering.meetu.model.PossibleDate;
 import co.edu.unal.software_engineering.meetu.repository.OptionRepository;
-import co.edu.unal.software_engineering.meetu.repository.PossibleDateRepository;
 import org.springframework.stereotype.Service;
 
 

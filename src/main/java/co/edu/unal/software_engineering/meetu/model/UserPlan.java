@@ -1,7 +1,7 @@
 package co.edu.unal.software_engineering.meetu.model;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Private package class for the relation with M...M table
@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table( name = "user_plan", schema = "public" )
-class UserPlan implements Serializable{
+class UserPlan implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -72,7 +72,7 @@ class UserPlan implements Serializable{
      */
 
     @Embeddable
-    private static class UserPlanPK implements Serializable{
+    private static class UserPlanPK implements Serializable {
 
         private static final long serialVersionUID = 1L;
 

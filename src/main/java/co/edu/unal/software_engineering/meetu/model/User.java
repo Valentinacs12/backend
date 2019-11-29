@@ -2,17 +2,17 @@ package co.edu.unal.software_engineering.meetu.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 import java.sql.Blob;
+import java.util.List;
 
 /**
  * The persistent class for the user database table.
  */
 @Entity
 @Table( name = "user", schema = "public" )
-public class User implements Serializable{
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

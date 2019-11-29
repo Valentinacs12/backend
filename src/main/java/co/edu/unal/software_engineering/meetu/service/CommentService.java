@@ -2,8 +2,6 @@ package co.edu.unal.software_engineering.meetu.service;
 
 import co.edu.unal.software_engineering.meetu.model.Comment;
 import co.edu.unal.software_engineering.meetu.repository.CommentRepository;
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 @Service

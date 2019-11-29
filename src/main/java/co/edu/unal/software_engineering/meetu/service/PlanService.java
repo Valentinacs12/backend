@@ -1,11 +1,8 @@
 package co.edu.unal.software_engineering.meetu.service;
 
 import co.edu.unal.software_engineering.meetu.model.Plan;
-import co.edu.unal.software_engineering.meetu.model.User;
 import co.edu.unal.software_engineering.meetu.pojo.CreatePlanPOJO;
-import co.edu.unal.software_engineering.meetu.pojo.RegisterUserPOJO;
 import co.edu.unal.software_engineering.meetu.repository.PlanRepository;
-import co.edu.unal.software_engineering.meetu.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 

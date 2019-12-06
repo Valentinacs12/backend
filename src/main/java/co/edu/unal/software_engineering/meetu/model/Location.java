@@ -17,13 +17,12 @@ public class Location implements Serializable {
     /**
      * Attributes
      */
-
     @Id
     @SequenceGenerator(name = "LOCATION_LOCATIONID_GENERATOR", sequenceName = "public.location_location_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "LOCATION_LOCATIONID_GENERATOR", strategy = GenerationType.SEQUENCE)
-    @Column(name = "idLocation")
 
-    private Integer idLocation;
+    @Column(name = "location_id")
+    private Integer location_id;
 
     @Column(name = "name")
     private String name;
@@ -31,26 +30,27 @@ public class Location implements Serializable {
     // bi-directional many-to-one association to Plan
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idPlan")
+    @JoinColumn(name = "plan_id")
     private Plan plan;
+
 
     /**
      * Constructors
      */
-
     public Location() {
     }
+
 
     /**
      * Getters and Setters
      */
 
-    public Integer getIdLocation() {
-        return idLocation;
+    public Integer getLocation_id() {
+        return location_id;
     }
 
-    public void setIdLocation(Integer idLocation) {
-        this.idLocation = idLocation;
+    public void setLocation_id(Integer location_id) {
+        this.location_id = location_id;
     }
 
     public String getName() {
@@ -69,20 +69,19 @@ public class Location implements Serializable {
         this.plan = plan;
     }
 
+
     /**
      * Methods
      */
-
     @Override
     public boolean equals(Object object) {
         if (!(object instanceof Location))
             return false;
-        return idLocation.equals(((Location) object).getIdLocation());
+        return location_id.equals(((Location) object).getLocation_id());
     }
 
     @Override
     public int hashCode() {
-        return idLocation;
+        return location_id;
     }
-
 }

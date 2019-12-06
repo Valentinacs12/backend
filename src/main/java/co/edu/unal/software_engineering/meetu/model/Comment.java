@@ -18,13 +18,12 @@ public class Comment implements Serializable {
     /**
      * Attributes
      */
-
     @Id
     @SequenceGenerator(name = "COMMENT_COMMENTID_GENERATOR", sequenceName = "public.comment_comment_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "COMMENT_COMMENTID_GENERATOR", strategy = GenerationType.SEQUENCE)
-    @Column(name = "idComment")
 
-    private Integer idComment;
+    @Column(name = "comment_id")
+    private Integer comment_id;
 
     @Column(name = "commentary")
     private String commentary;
@@ -35,26 +34,26 @@ public class Comment implements Serializable {
     // bi-directional many-to-one association to Plan
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idPlan")
+    @JoinColumn(name = "plan_id")
     private Plan plan;
+
 
     /**
      * Constructors
      */
-
     public Comment() {
     }
+
 
     /**
      * Getters and Setters
      */
-
-    public Integer getIdComment() {
-        return idComment;
+    public Integer getComment_id() {
+        return comment_id;
     }
 
-    public void setIdComment(Integer idComment) {
-        this.idComment = idComment;
+    public void setComment_id(Integer comment_id) {
+        this.comment_id = comment_id;
     }
 
     public String getCommentary() {
@@ -81,19 +80,19 @@ public class Comment implements Serializable {
         this.plan = plan;
     }
 
+
     /**
      * Methods
      */
-
     @Override
     public boolean equals(Object object) {
         if (!(object instanceof Comment))
             return false;
-        return idComment.equals(((Comment) object).getIdComment());
+        return comment_id.equals(((Comment) object).getComment_id());
     }
 
     @Override
     public int hashCode() {
-        return idComment;
+        return comment_id;
     }
 }

@@ -4,29 +4,18 @@ import co.edu.unal.software_engineering.meetu.model.Budget;
 import co.edu.unal.software_engineering.meetu.repository.BudgetRepository;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class BudgetService {
 
     private final BudgetRepository budgetRepository;
 
-    public BudgetService(BudgetRepository budgetRepository ){
+    public BudgetService(BudgetRepository budgetRepository){
         this.budgetRepository = budgetRepository;
     }
 
-    public Budget findById(Integer id) {
-        return budgetRepository.findById(id).orElse(null);
+    public void save( Budget buget ){
+        budgetRepository.save( buget );
     }
 
-    /*
-    public Budget findByPlanId(Integer planId) {
-        return budgetRepository.findByPlanId(  planId );
-    }
-    */
-
-
-    public void save( Budget budget ){
-        budgetRepository.save( budget );
-    }
-
-    //Quizas falta isRightBudget
 }

@@ -55,7 +55,7 @@ class UserPlan implements Serializable {
         if( !(object instanceof UserPlan) ) return false;
         UserPlan userPlan = (UserPlan) object;
         return getUser( ).getId( ).equals( userPlan.getUser( ).getId( ) ) &&
-                getPlan( ).getIdPlan( ).equals( userPlan.getPlan( ).getIdPlan( ) );
+                getPlan( ).getPlan_id( ).equals( userPlan.getPlan( ).getPlan_id( ) );
     }
 
     @Override
@@ -85,7 +85,7 @@ class UserPlan implements Serializable {
         private User user;
 
         @ManyToOne
-        @JoinColumn( name = "idPlan", insertable = false, updatable = false )
+        @JoinColumn( name = "id_plan", insertable = false, updatable = false )
         private Plan plan;
 
         /**

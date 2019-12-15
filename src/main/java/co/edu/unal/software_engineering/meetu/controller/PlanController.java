@@ -35,11 +35,11 @@ public class PlanController {
     @PostMapping( value = { "/plan/" } )
     public ResponseEntity register(@RequestBody CreatePlanPOJO planPOJO ){
         String email = SecurityContextHolder.getContext( ).getAuthentication( ).getName();
-        Plan newPlan = new Plan();
         User existingUser = userService.findByEmail( email );
+
+        Plan newPlan = new Plan();
         newPlan.setDescription(planPOJO.getDescription());
         newPlan.setTitle(planPOJO.getTitle());
-        // newPlan.setBudgets(planPOJO.getBudgets());
         planService.save(newPlan);
 
         List<Budget> listBudgets = planPOJO.getBudgets();
@@ -106,6 +106,7 @@ public class PlanController {
             // newPlan.addBudget(newBudget);
         }
         newPlan.setDates(ltpd);
+
         List<User> users = new ArrayList<User>();
         users.add(existingUser);
         newPlan.setUsers(users);
@@ -116,9 +117,11 @@ public class PlanController {
     }
 
 
-    @GetMapping(value = {"/consultaplan/{planId}"}) //Get plan
-    public Plan getPlan(@PathVariable Integer planId) {
-        Plan temp = planService.findById(planId);
+    @GetMapping(value = {"/plan/"}) //Get plan
+    public List<Plan> getPlan() {
+        String email = SecurityContextHolder.getContext( ).getAuthentication( ).getName();
+        User userTemp = userService.findByEmail( email );
+        List<Plan> temp = userTemp.getPlans();
         return temp;
     }
 
@@ -126,7 +129,7 @@ public class PlanController {
     @PutMapping( value = {"consultaplan/{planId}"} ) //Update plan --------- NOT WORKING
     public ResponseEntity updatePlan( @PathVariable Integer planId, @RequestBody CreatePlanPOJO planPOJO) {
 
-        Plan temp = getPlan(planId);
+        Plan temp = null;
         temp.setTitle(planPOJO.getTitle());
         temp.setDescription(planPOJO.getDescription());
 
@@ -187,7 +190,7 @@ public class PlanController {
     }
 
 
-    @DeleteMapping(value = {"consultaplan/{planId}"})   //delete plan
+    @DeleteMapping(value = {"/plan/{planId}"})   //delete plan
     public ResponseEntity<?> deletePlan(@PathVariable Integer planId) {
         return planRepository.findById(planId)
                 .map(plan -> {

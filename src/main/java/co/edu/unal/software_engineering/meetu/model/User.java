@@ -48,6 +48,7 @@ public class User implements Serializable{
     @Column(name = "image")
     private Blob image;
 
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 

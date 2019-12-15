@@ -116,8 +116,10 @@ public class PlanController {
     }
 
 
-    @PutMapping( value = {"consultaplan/{planId}"} ) //Update plan
+    @PutMapping( value = {"plan/{planId}"} ) //Update plan
     public ResponseEntity updatePlan( @PathVariable Integer planId, @RequestBody CreatePlanPOJO planPOJO) {
+        String email = SecurityContextHolder.getContext( ).getAuthentication( ).getName();
+        User existingUser = userService.findByEmail( email );
 
         if (!planService.existsById(planId)){
             return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -180,6 +182,10 @@ public class PlanController {
             }
             temp.setDates(ltpd);
 
+            List<User> users = new ArrayList<User>();
+            users.add(existingUser);
+            temp.setUsers(users);
+
             planService.save(temp);
 
             return new ResponseEntity(HttpStatus.OK);
@@ -195,6 +201,5 @@ public class PlanController {
                     return ResponseEntity.ok().build();
                 }).orElseThrow(() -> new ResourceNotFoundException("Plan not found with id " + planId));
     }
-
 
 }

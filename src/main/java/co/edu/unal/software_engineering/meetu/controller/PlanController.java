@@ -123,18 +123,66 @@ public class PlanController {
 
 
     @PutMapping( value = {"consultaplan/{planId}"} ) //Update plan --------- NOT WORKING
-    public Plan updatePlan( @PathVariable Integer planId) {
-        return planRepository.findById(planId)
-                .map(plan -> {
-                    plan.setBudgets(plan.getBudgets());
-                    plan.setComments(plan.getComments());
-                    plan.setDates(plan.getDates());
-                    plan.setDescription(plan.getDescription());
-                    plan.setLocations(plan.getLocations());
-                    plan.setOptions(plan.getOptions());
-                    plan.setTitle(plan.getTitle());
-                    return planRepository.save(plan);
-                }).orElseThrow(() -> new ResourceNotFoundException("Plan not found with id " + planId));
+    public ResponseEntity updatePlan( @PathVariable Integer planId, @RequestBody CreatePlanPOJO planPOJO) {
+
+        Plan temp = getPlan(planId);
+        temp.setTitle(planPOJO.getTitle());
+        temp.setDescription(planPOJO.getDescription());
+
+        List<Budget> listBudgets = planPOJO.getBudgets();
+        List<Budget> ltbg = new ArrayList<Budget>();
+        for (Budget budget : listBudgets) {
+            Budget newBudget = new Budget();
+            newBudget.setMoney(budget.getMoney());
+            newBudget.setPlan(temp);
+            ltbg.add(newBudget);
+        }
+        temp.setBudgets(ltbg);
+
+        List<Comment> listComments = planPOJO.getComments();
+        List<Comment> ltcmm = new ArrayList<Comment>();
+        for (Comment comment : listComments) {
+            Comment newComment = new Comment();
+            newComment.setCommentary(comment.getCommentary());
+            newComment.setPlan(temp);
+            ltcmm.add(newComment);
+        }
+        temp.setComments(ltcmm);
+
+        List<Location> listLocations = planPOJO.getLocations();
+        List<Location> ltlc = new ArrayList<Location>();
+        for (Location location : listLocations) {
+            Location newLocation = new Location();
+            newLocation.setName(location.getName());
+            newLocation.setPlan(temp);
+            ltlc.add(newLocation);
+        }
+        temp.setLocations(ltlc);
+
+        List<Option> listOptions = planPOJO.getOptions();
+        List<Option> lto = new ArrayList<Option>();
+        for (Option option : listOptions) {
+            Option newOption = new Option();
+            newOption.setName(option.getName());
+            newOption.setPlan(temp);
+            lto.add(newOption);
+        }
+        temp.setOptions(lto);
+
+        List<PossibleDate> listDates = planPOJO.getDates();
+        List<PossibleDate> ltpd = new ArrayList<PossibleDate>();
+        for (PossibleDate date : listDates) {
+            PossibleDate newDate = new PossibleDate();
+            newDate.setStart_date(date.getStart_date());
+            newDate.setEnd_date(date.getEnd_date());
+            newDate.setPlan(temp);
+            ltpd.add(newDate);
+        }
+        temp.setDates(ltpd);
+
+        planService.save(temp);
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 

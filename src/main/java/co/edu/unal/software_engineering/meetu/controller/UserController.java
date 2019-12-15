@@ -79,6 +79,25 @@ public class UserController {
         return new ResponseEntity( HttpStatus.CREATED );
     }
 
+    @PutMapping( value = {"consultausuarioemail/{userEmail}"}) //Update user
+    public ResponseEntity updateUser( @PathVariable String userEmail, @RequestBody
+                                      RegisterUserPOJO userPOJO){
+
+        PasswordEncoder passwordEncoder = webSecurityConfiguration.passwordEncoder();
+
+        User temp = getUserByEmail(userEmail);
+        temp.setCity(userPOJO.getCity().toLowerCase());
+        temp.setEmail(userPOJO.getEmail().toLowerCase());
+        temp.setLast_name(userPOJO.getLast_name().toLowerCase());
+        temp.setPhone_number(userPOJO.getPhone_number());
+        temp.setUsername(userPOJO.getUsername().toLowerCase());
+        temp.setPassword(passwordEncoder.encode(userPOJO.getPassword()));
+
+        userService.save(temp);
+        return new ResponseEntity(HttpStatus.OK);
+
+    }
+
     /*
     @DeleteMapping( value = {"consultausuario/{userId}"})   //Delete user
     public ResponseEntity<?> deleteUser(@PathVariable Integer userId){

@@ -34,7 +34,6 @@ public class User implements Serializable{
     @Column(name = "last_name")
     private String last_name;
 
-    @JsonIgnore
     @Column(name = "phone_number")
     private String phone_number;
 

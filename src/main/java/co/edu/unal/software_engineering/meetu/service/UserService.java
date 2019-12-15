@@ -5,6 +5,8 @@ import co.edu.unal.software_engineering.meetu.pojo.RegisterUserPOJO;
 import co.edu.unal.software_engineering.meetu.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @Service
 public class UserService{
@@ -35,4 +37,9 @@ public class UserService{
         }
         return correctness;
     }
+
+    public User findById(Integer id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
 }

@@ -76,19 +76,6 @@ public class UserController {
         return new ResponseEntity( HttpStatus.CREATED );
     }
 
-    @PostMapping( value = { "/login" } )
-    public ResponseEntity login(@RequestBody LoginUserPOJO userPOJO ){
-
-        User existingUser = userService.findByEmail( userPOJO.getEmail( ) );
-
-        if (existingUser != null){
-            boolean esValido = passwordEncoder.matches(userPOJO.getPassword(), existingUser.getPassword());
-            if(esValido){
-                return new ResponseEntity(HttpStatus.ACCEPTED);
-            }
-        }
-        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
-    }
 
  */
 }

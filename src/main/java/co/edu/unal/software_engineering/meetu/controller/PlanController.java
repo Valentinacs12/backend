@@ -11,6 +11,7 @@ import co.edu.unal.software_engineering.meetu.service.BudgetService;
 import co.edu.unal.software_engineering.meetu.service.PlanService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import java.util.List;
 public class PlanController {
 
     private final PlanService planService;
+
     // private final BudgetService budgetService;
 
     public PlanController(PlanService planService, BudgetService budgetService){
@@ -30,9 +32,9 @@ public class PlanController {
     }
 
 
-    @PostMapping( value = { "/plan" } )
+    @PostMapping( value = { "/plan/" } )
     public ResponseEntity register(@RequestBody CreatePlanPOJO planPOJO ){
-
+        String username = SecurityContextHolder.getContext( ).getAuthentication( ).getName();
         Plan newPlan = new Plan();
 
         newPlan.setDescription(planPOJO.getDescription());

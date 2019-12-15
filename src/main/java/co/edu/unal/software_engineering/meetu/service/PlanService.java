@@ -26,6 +26,10 @@ public class PlanService {
         planRepository.save( plan );
     }
 
+    public void delete (Plan plan) {
+        planRepository.delete(plan);
+    }
+
     public boolean existsById(Integer id){
         return planRepository.existsById(id);
     }

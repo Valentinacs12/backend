@@ -1,14 +1,10 @@
 package co.edu.unal.software_engineering.meetu.controller;
 
-import co.edu.unal.software_engineering.meetu.model.Budget;
-import co.edu.unal.software_engineering.meetu.model.Comment;
-import co.edu.unal.software_engineering.meetu.model.Location;
-import co.edu.unal.software_engineering.meetu.model.Plan;
-import co.edu.unal.software_engineering.meetu.model.Option;
-import co.edu.unal.software_engineering.meetu.model.PossibleDate;
+import co.edu.unal.software_engineering.meetu.model.*;
 import co.edu.unal.software_engineering.meetu.pojo.CreatePlanPOJO;
 import co.edu.unal.software_engineering.meetu.service.BudgetService;
 import co.edu.unal.software_engineering.meetu.service.PlanService;
+import co.edu.unal.software_engineering.meetu.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,20 +19,18 @@ import java.util.List;
 public class PlanController {
 
     private final PlanService planService;
+    private final UserService userService;
 
-    // private final BudgetService budgetService;
-
-    public PlanController(PlanService planService, BudgetService budgetService){
+    public PlanController(PlanService planService, UserService userService) {
         this.planService = planService;
-       // this.budgetService = budgetService;
+        this.userService = userService;
     }
-
 
     @PostMapping( value = { "/plan/" } )
     public ResponseEntity register(@RequestBody CreatePlanPOJO planPOJO ){
-        String username = SecurityContextHolder.getContext( ).getAuthentication( ).getName();
+        String email = SecurityContextHolder.getContext( ).getAuthentication( ).getName();
         Plan newPlan = new Plan();
-
+        User existingUser = userService.findByEmail( email );
         newPlan.setDescription(planPOJO.getDescription());
         newPlan.setTitle(planPOJO.getTitle());
         // newPlan.setBudgets(planPOJO.getBudgets());
@@ -106,8 +100,11 @@ public class PlanController {
             // newPlan.addBudget(newBudget);
         }
         newPlan.setDates(ltpd);
-        planService.save(newPlan);
+        List<User> users = new ArrayList<User>();
+        users.add(existingUser);
+        newPlan.setUsers(users);
 
+        planService.save(newPlan);
 
         return new ResponseEntity( HttpStatus.CREATED );
     }

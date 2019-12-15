@@ -62,6 +62,13 @@ public class Plan implements Serializable {
             fetch = FetchType.LAZY, mappedBy = "plan")
     private List<PossibleDate> dates;
 
+    //bi-directional many-to-many association to Role
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)    // TODO verificar (fetch = FetchType.EAGER)
+    @JoinTable( name = "user_plan", joinColumns = { @JoinColumn( name = "plan_id" ) },
+            inverseJoinColumns = { @JoinColumn( name = "user_id" ) } )
+    private List<User> users;
+
     /**
      * Constructors
      */
@@ -135,6 +142,14 @@ public class Plan implements Serializable {
 
     public void setDates(List<PossibleDate> dates) {
         this.dates = dates;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     /**

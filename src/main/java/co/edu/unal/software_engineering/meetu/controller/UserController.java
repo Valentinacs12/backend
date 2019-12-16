@@ -1,7 +1,6 @@
 package co.edu.unal.software_engineering.meetu.controller;
 
 import co.edu.unal.software_engineering.meetu.auth.configuration.WebSecurityConfiguration;
-import co.edu.unal.software_engineering.meetu.exception.ResourceNotFoundException;
 import co.edu.unal.software_engineering.meetu.model.Role;
 import co.edu.unal.software_engineering.meetu.model.User;
 import co.edu.unal.software_engineering.meetu.pojo.RegisterUserPOJO;
@@ -11,13 +10,11 @@ import co.edu.unal.software_engineering.meetu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
-
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @CrossOrigin
@@ -25,13 +22,11 @@ import java.util.Collections;
 public class UserController {
 
     private final UserService userService;
-
     private final RoleService roleService;
+    private WebSecurityConfiguration webSecurityConfiguration;
 
     @Autowired
     private UserRepository userRepository;
-
-    private WebSecurityConfiguration webSecurityConfiguration;
 
     public UserController(UserService userService, RoleService roleService, WebSecurityConfiguration webSecurityConfiguration){
         this.userService = userService;
@@ -39,25 +34,8 @@ public class UserController {
         this.webSecurityConfiguration = webSecurityConfiguration;
     }
 
-/*
-    @Bean
-    public PasswordEncoder passwordEncoder( ){
-        return new BCryptPasswordEncoder( );
-    }
-*/
 
-    @GetMapping( value =  {"consultausuario/{userId}"}) // Get user
-    public User getUser(@PathVariable Integer userId) {
-        User user = userService.findById(userId);
-        return user;
-    }
-
-    @GetMapping( value =  {"consultausuarioemail/{userEmail}"}) // Get user
-    public User getUserByEmail(@PathVariable String userEmail) {
-        return userService.findByEmail(userEmail);
-    }
-
-    @PostMapping( value = { "/registro/{roleId}" } )
+    @PostMapping( value = { "/user/register/{roleId}" } )
     public ResponseEntity register(@PathVariable Integer roleId, @RequestBody RegisterUserPOJO userPOJO ){
         Role role = roleService.findById( roleId );
         User existingUser = userService.findByEmail( userPOJO.getEmail( ) );
@@ -79,51 +57,43 @@ public class UserController {
         return new ResponseEntity( HttpStatus.CREATED );
     }
 
-    @PutMapping( value = {"consultausuarioemail/{userEmail}"}) //Update user
-    public ResponseEntity updateUser( @PathVariable String userEmail, @RequestBody
-                                      RegisterUserPOJO userPOJO){
+
+    @GetMapping( value =  {"user/"}) // Get user
+    public User getUserByEmail() {
+        String email = SecurityContextHolder.getContext( ).getAuthentication( ).getName();
+        User existingUser = userService.findByEmail( email );
+        return userService.findByEmail(email);
+    }
+
+
+    @PutMapping( value = {"user/"}) //Update user
+    public ResponseEntity updateUser( @RequestBody RegisterUserPOJO userPOJO){
 
         PasswordEncoder passwordEncoder = webSecurityConfiguration.passwordEncoder();
 
-        User temp = getUserByEmail(userEmail);
-        temp.setCity(userPOJO.getCity().toLowerCase());
-        temp.setEmail(userPOJO.getEmail().toLowerCase());
-        temp.setLast_name(userPOJO.getLast_name().toLowerCase());
-        temp.setPhone_number(userPOJO.getPhone_number());
-        temp.setUsername(userPOJO.getUsername().toLowerCase());
-        temp.setPassword(passwordEncoder.encode(userPOJO.getPassword()));
+        String email = SecurityContextHolder.getContext( ).getAuthentication( ).getName();
+        User temp = userService.findByEmail( email );
+        if(userPOJO.getEmail() != null){
+            temp.setEmail(userPOJO.getEmail().toLowerCase());
+        }
+        if(userPOJO.getPhone_number() != null){
+            temp.setPhone_number(userPOJO.getPhone_number());
+        }
+        if(userPOJO.getLast_name() != null){
+            temp.setLast_name(userPOJO.getLast_name().toLowerCase());
+        }
+        if(userPOJO.getCity() != null){
+            temp.setCity(userPOJO.getCity().toLowerCase());
+        }
+        if(userPOJO.getPassword() != null){
+            temp.setPassword(passwordEncoder.encode(userPOJO.getPassword()));
+        }
+        if(userPOJO.getUsername() != null){
+            temp.setUsername(userPOJO.getUsername().toLowerCase());
+        }
 
         userService.save(temp);
         return new ResponseEntity(HttpStatus.OK);
-
     }
 
-    /*
-    @DeleteMapping( value = {"consultausuario/{userId}"})   //Delete user
-    public ResponseEntity<?> deleteUser(@PathVariable Integer userId){
-        return userRepository.findById(userId)
-                .map(user -> {
-                    userRepository.delete(user);
-                    return ResponseEntity.ok().build();
-                }).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + userId));
-    }
-     */
-
-/*
-    @PostMapping( value = { "/registro/nuevo-rol/{roleId}" } )
-    public ResponseEntity registerRoleToUser(@PathVariable Integer roleId, @RequestBody LoginUserPOJO userPOJO ){
-        Role role = roleService.findById( roleId );
-        User existingUser = userService.findByEmail( userPOJO.getEmail( ) );
-        if( role == null || existingUser == null || existingUser.getRoles( ).contains( role ) ){
-            return new ResponseEntity( HttpStatus.BAD_REQUEST );
-        }else if( !passwordEncoder.matches( userPOJO.getPassword( ), existingUser.getPassword( ) ) ){
-            return new ResponseEntity( HttpStatus.UNAUTHORIZED );
-        }
-        existingUser.addRole( role );
-        userService.save( existingUser );
-        return new ResponseEntity( HttpStatus.CREATED );
-    }
-
-
- */
 }

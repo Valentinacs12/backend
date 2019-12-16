@@ -57,14 +57,7 @@ public class User implements Serializable{
     @JoinTable( name = "user_role", joinColumns = { @JoinColumn( name = "user_id" ) },
             inverseJoinColumns = { @JoinColumn( name = "role_id" ) } )
     private List<Role> roles;
-/*
-    //bi-directional many-to-many association to Role
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY)    // TODO verificar (fetch = FetchType.EAGER)
-    @JoinTable( name = "user_plan", joinColumns = { @JoinColumn( name = "user_id" ) },
-            inverseJoinColumns = { @JoinColumn( name = "plan_id" ) } )
-    private List<Plan> plans;
-*/
+
     //bi-directional many-to-many association to User
     @JsonIgnore
     @ManyToMany( mappedBy = "users" )

@@ -32,13 +32,15 @@ public class PlanController {
     @Autowired
     private PlanRepository planRepository;
 
-    @PostMapping( value = { "/plan" } )
+    @PostMapping( value = { "/plan/" } )
     public ResponseEntity register(@RequestBody CreatePlanPOJO planPOJO ){
         String email = SecurityContextHolder.getContext( ).getAuthentication( ).getName();
-        Plan newPlan = new Plan();
         User existingUser = userService.findByEmail( email );
+
+        Plan newPlan = new Plan();
         newPlan.setDescription(planPOJO.getDescription());
         newPlan.setTitle(planPOJO.getTitle());
+        planService.save(newPlan);
 
         List<Budget> listBudgets = planPOJO.getBudgets();
         List<Budget> ltbg = new ArrayList<Budget>();
@@ -95,7 +97,6 @@ public class PlanController {
         }
         newPlan.setDates(ltpd);
 
-
         List<User> users = new ArrayList<User>();
         users.add(existingUser);
         newPlan.setUsers(users);
@@ -106,15 +107,19 @@ public class PlanController {
     }
 
 
-    @GetMapping(value = {"/consultaplan/{planId}"}) //Get plan
-    public Plan getPlan(@PathVariable Integer planId) {
-        Plan temp = planService.findById(planId);
+    @GetMapping(value = {"/plan/"}) //Get plan
+    public List<Plan> getPlan() {
+        String email = SecurityContextHolder.getContext( ).getAuthentication( ).getName();
+        User userTemp = userService.findByEmail( email );
+        List<Plan> temp = userTemp.getPlans();
         return temp;
     }
 
 
-    @PutMapping( value = {"consultaplan/{planId}"} ) //Update plan
+    @PutMapping( value = {"plan/{planId}"} ) //Update plan
     public ResponseEntity updatePlan( @PathVariable Integer planId, @RequestBody CreatePlanPOJO planPOJO) {
+        String email = SecurityContextHolder.getContext( ).getAuthentication( ).getName();
+        User existingUser = userService.findByEmail( email );
 
         if (!planService.existsById(planId)){
             return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -177,6 +182,10 @@ public class PlanController {
             }
             temp.setDates(ltpd);
 
+            List<User> users = new ArrayList<User>();
+            users.add(existingUser);
+            temp.setUsers(users);
+
             planService.save(temp);
 
             return new ResponseEntity(HttpStatus.OK);
@@ -184,7 +193,7 @@ public class PlanController {
     }
 
 
-    @DeleteMapping(value = {"consultaplan/{planId}"})   //delete plan
+    @DeleteMapping(value = {"/plan/{planId}"})   //delete plan
     public ResponseEntity<?> deletePlan(@PathVariable Integer planId) {
         return planRepository.findById(planId)
                 .map(plan -> {
@@ -192,6 +201,5 @@ public class PlanController {
                     return ResponseEntity.ok().build();
                 }).orElseThrow(() -> new ResourceNotFoundException("Plan not found with id " + planId));
     }
-
 
 }

@@ -1,4 +1,4 @@
-package co.edu.unal.software_engineering.meetu;
+package co.edu.unal.software_engineering.meetu.service;
 
 
 import co.edu.unal.software_engineering.meetu.model.Role;

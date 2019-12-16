@@ -34,7 +34,6 @@ public class User implements Serializable{
     @Column(name = "last_name")
     private String last_name;
 
-    @JsonIgnore
     @Column(name = "phone_number")
     private String phone_number;
 
@@ -48,6 +47,7 @@ public class User implements Serializable{
     @Column(name = "image")
     private Blob image;
 
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 
@@ -58,6 +58,10 @@ public class User implements Serializable{
             inverseJoinColumns = { @JoinColumn( name = "role_id" ) } )
     private List<Role> roles;
 
+    //bi-directional many-to-many association to User
+    @JsonIgnore
+    @ManyToMany( mappedBy = "users" )
+    private List<Plan> plans;
     /**
      * Constructors
      */
@@ -130,6 +134,14 @@ public class User implements Serializable{
 
     public void setRoles( List<Role> roles ){
         this.roles = roles;
+    }
+
+    public List<Plan> getPlans() {
+        return plans;
+    }
+
+    public void setPlans(List<Plan> plans) {
+        this.plans = plans;
     }
 
     /**

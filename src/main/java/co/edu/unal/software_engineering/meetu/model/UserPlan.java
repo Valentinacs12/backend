@@ -85,7 +85,7 @@ class UserPlan implements Serializable{
         private User user;
 
         @ManyToOne
-        @JoinColumn( name = "id_plan", insertable = false, updatable = false )
+        @JoinColumn( name = "plan_id", insertable = false, updatable = false )
         private Plan plan;
 
         /**

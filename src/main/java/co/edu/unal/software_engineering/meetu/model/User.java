@@ -1,6 +1,11 @@
 package co.edu.unal.software_engineering.meetu.model;
 
+import co.edu.unal.software_engineering.meetu.log.LogModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -12,7 +17,7 @@ import java.sql.Blob;
  */
 @Entity
 @Table( name = "user", schema = "public" )
-public class User implements Serializable{
+public class User extends LogModel {
 
     private static final long serialVersionUID = 1L;
 

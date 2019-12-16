@@ -1,6 +1,7 @@
 package co.edu.unal.software_engineering.meetu.controller;
 
 import co.edu.unal.software_engineering.meetu.auth.configuration.WebSecurityConfiguration;
+import co.edu.unal.software_engineering.meetu.exception.ResourceNotFoundException;
 import co.edu.unal.software_engineering.meetu.model.Role;
 import co.edu.unal.software_engineering.meetu.model.User;
 import co.edu.unal.software_engineering.meetu.pojo.RegisterUserPOJO;
@@ -94,6 +95,13 @@ public class UserController {
 
         userService.save(temp);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = {"user/"})   //delete plan
+    public ResponseEntity<?> deletePlan() {
+        String email = SecurityContextHolder.getContext( ).getAuthentication( ).getName();
+        userService.delete(userService.findByEmail(email));
+        return new ResponseEntity( HttpStatus.OK );
     }
 
 }

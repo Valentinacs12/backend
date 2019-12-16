@@ -1,5 +1,6 @@
 package co.edu.unal.software_engineering.meetu.service;
 
+import co.edu.unal.software_engineering.meetu.model.Plan;
 import co.edu.unal.software_engineering.meetu.model.User;
 import co.edu.unal.software_engineering.meetu.pojo.RegisterUserPOJO;
 import co.edu.unal.software_engineering.meetu.repository.UserRepository;
@@ -23,6 +24,10 @@ public class UserService{
 
     public void save( User user ){
         userRepository.save( user );
+    }
+
+    public void delete (User user) {
+        userRepository.delete(user);
     }
 
     public boolean isRightUser( RegisterUserPOJO user ){
